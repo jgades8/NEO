@@ -1,3 +1,4 @@
+
 public class NearEarthObject {
 
     // Class for Near Earth Objects
@@ -32,6 +33,34 @@ public class NearEarthObject {
     private double missDistLunar;
     private double missDistMi;
 
+    // Constructor
+    public NearEarthObject(String neoReferenceId, String nasaJplUrl, Boolean isSentryObj, String name, Boolean isPotentiallyHazardous, double absoluteMagnitudeH, String links, String id, double estDiamMaxFt, double estDiamMinFt, double estDiamMaxKm, double estDiamMinKm, double estDiamMaxM, double estDiamMinM, double estDiamMaxMi, double estDiamMinMi, double relVelKmPHr, double relVelKmPSec, double relVelMPH, String orbitingBody, String closeApproachDate, double missDistAstronom, double missDistKm, double missDistLunar, double missDistMi) {
+        this.neoReferenceId = neoReferenceId;
+        this.nasaJplUrl = nasaJplUrl;
+        this.isSentryObj = isSentryObj;
+        this.name = name;
+        this.isPotentiallyHazardous = isPotentiallyHazardous;
+        this.absoluteMagnitudeH = absoluteMagnitudeH;
+        this.links = links;
+        this.id = id;
+        this.estDiamMaxFt = estDiamMaxFt;
+        this.estDiamMinFt = estDiamMinFt;
+        this.estDiamMaxKm = estDiamMaxKm;
+        this.estDiamMinKm = estDiamMinKm;
+        this.estDiamMaxM = estDiamMaxM;
+        this.estDiamMinM = estDiamMinM;
+        this.estDiamMaxMi = estDiamMaxMi;
+        this.estDiamMinMi = estDiamMinMi;
+        this.relVelKmPHr = relVelKmPHr;
+        this.relVelKmPSec = relVelKmPSec;
+        this.relVelMPH = relVelMPH;
+        this.orbitingBody = orbitingBody;
+        this.closeApproachDate = closeApproachDate;
+        this.missDistAstronom = missDistAstronom;
+        this.missDistKm = missDistKm;
+        this.missDistLunar = missDistLunar;
+        this.missDistMi = missDistMi;
+    }
 
     // Getters and Setters
     public String getNeoReferenceId() {
@@ -233,6 +262,5 @@ public class NearEarthObject {
     public void setMissDistMi(double missDistMi) {
         this.missDistMi = missDistMi;
     }
-
 
 }

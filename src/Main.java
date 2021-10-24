@@ -131,7 +131,7 @@ public class Main {
                                 missDistLunar, missDistMi);
                         nearEarthObjectArrayList.add(neo);
 
-//                        // Print date
+//                        // Print data
 //                        nearEarthObjectArrayList.get(i).printGeneralInfo();
 //                        nearEarthObjectArrayList.get(i).printMissData();
 //                        nearEarthObjectArrayList.get(i).printEstDiamInfo();

@@ -67,10 +67,10 @@ public class Main {
                     // Create array to store NEOs
                     ArrayList<NearEarthObject> nearEarthObjectArrayList = new ArrayList<NearEarthObject>();
 
-                    while (itr.hasNext()) {
+                    // Print new line
+                    System.out.print("\n");
 
-                        // Print new line
-                        System.out.print("\n");
+                    while (itr.hasNext()) {
 
                         // Get data for specific asteroid based on index i
                         JSONObject specificAsteroid = (JSONObject) specificDate.get(i);
@@ -131,18 +131,20 @@ public class Main {
                                 missDistLunar, missDistMi);
                         nearEarthObjectArrayList.add(neo);
 
-                        // Print data
-                        System.out.println("Name: " + nearEarthObjectArrayList.get(i).getName());
-                        System.out.println("ID: " + nearEarthObjectArrayList.get(i).getId());
-                        System.out.println("Closest distance to Earth in miles: " +
-                                nearEarthObjectArrayList.get(i).getMissDistMi());
-                        System.out.println("Is potentially hazardous asteroid: " +
-                                nearEarthObjectArrayList.get(i).getPotentiallyHazardous());
+//                        // Print date
+//                        nearEarthObjectArrayList.get(i).printGeneralInfo();
+//                        nearEarthObjectArrayList.get(i).printMissData();
+//                        nearEarthObjectArrayList.get(i).printEstDiamInfo();
+//                        nearEarthObjectArrayList.get(i).printVelData();
 
                         // Increment iterator values
                         itr.next();
                         ++i;
                     }
+
+                    // Allow user to choose if they want only potentially hazardous, not hazardous, or all data
+                    String wantOnlyHazardous = getHazardousInput();
+                    NearEarthObject.printOnlyHazardous(wantOnlyHazardous, nearEarthObjectArrayList);
 
                 }
             } catch(Exception e) {
@@ -164,11 +166,8 @@ public class Main {
         } else {
             System.out.println("Invalid date format.\n");
             // Call function recursively until date format is valid
-            getDateInput();
+            return getDateInput();
         }
-        // Set default date to return
-        String defaultDate = "2020-01-01";
-        return defaultDate;
     }
 
     // Verify date input
@@ -184,6 +183,25 @@ public class Main {
             }
         }
         return true;
+    }
+
+    public static String getHazardousInput() {
+        Scanner myScanner = new Scanner(System.in);
+        System.out.println("Do you want only potentially hazardous data? Enter 1 for yes, 2 for only not hazardous," +
+                "or 3 for all data: ");
+
+        String response = myScanner.nextLine();
+
+        // Verify input
+        switch(response) {
+            case "1":
+            case "2":
+            case "3":
+                return response;
+            default:
+                System.out.println("Invalid response.");
+                return getHazardousInput();
+        }
     }
 
     // Ideas: set time range, maybe within week, within day, etc.

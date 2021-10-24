@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class NearEarthObject {
 
@@ -261,6 +262,84 @@ public class NearEarthObject {
 
     public void setMissDistMi(double missDistMi) {
         this.missDistMi = missDistMi;
+    }
+
+    public void printGeneralInfo() {
+        System.out.println("Name: " + getName());
+        System.out.println("NEO Reference ID: " + getNeoReferenceId());
+        System.out.println("ID: " + getId());
+        System.out.println("Absolute Magnitude (H): " + getAbsoluteMagnitudeH());
+        System.out.println("Is potentially hazardous: " + getPotentiallyHazardous());
+        System.out.println("Is sentry object: " + getSentryObj());
+        System.out.println("NASA JPL URL: " + getNasaJplUrl());
+        System.out.println("Links: " + getLinks() + "\n");
+        return;
+    }
+
+    public void printEstDiamInfo() {
+        System.out.println("Diameter information of NEO reference ID " + getNeoReferenceId());
+
+        System.out.println("Estimated maximum diameter in feet: " + getEstDiamMaxFt());
+        System.out.println("Estimated minimum diameter in feet: " + getEstDiamMinFt());
+
+        System.out.println("Estimated maximum diameter in miles: " + getEstDiamMaxMi());
+        System.out.println("Estimated minimum diameter in miles: " + getEstDiamMinMi());
+
+        System.out.println("Estimated maximum diameter in meters: " + getEstDiamMaxM());
+        System.out.println("Estimated minimum diameter in meters: " + getEstDiamMinM());
+
+        System.out.println("Estimated maximum diameter in kilometers: " + getEstDiamMaxKm());
+        System.out.println("Estimated minimum diameter in kilometers: " + getEstDiamMinKm() + "\n");
+    }
+
+    public void printVelData() {
+        System.out.println("Velocity information of NEO reference ID " + getNeoReferenceId());
+
+        System.out.println("Relative velocity in miles per hour: " + getRelVelMPH());
+        System.out.println("Relative velocity in kilometers per hour: " + getRelVelKmPHr());
+        System.out.println("Relative velocity in kilometers per second: " + getRelVelKmPSec());
+    }
+
+    public void printMissData() {
+        System.out.println("NEO reference ID " + getNeoReferenceId() + " is near " + getOrbitingBody() + " on " + getCloseApproachDate());
+
+        System.out.println("Miss distance (astronomical): " + getMissDistAstronom());
+        System.out.println("Miss distance (lunar): " + getMissDistLunar());
+        System.out.println("Miss distance (miles): " + getMissDistMi());
+        System.out.println("Miss distance (kilometers): " + getMissDistKm() + "\n");
+    }
+
+    public void printAllData() {
+        printGeneralInfo();
+        printEstDiamInfo();
+        printVelData();
+        printMissData();
+        return;
+    }
+
+    // Prints information for all potentially hazardous or all not hazardous
+    public static void printOnlyHazardous(String wantHazardous, ArrayList<NearEarthObject> list) {
+        for (NearEarthObject neo : list) {
+            switch (wantHazardous) {
+                case "1":
+                    if (neo.getPotentiallyHazardous()) {
+                        neo.printAllData();
+                        break;
+                    } else {continue;}
+                case "2":
+                    if (!neo.getPotentiallyHazardous()) {
+                        neo.printAllData();
+                        break;
+                    } else {continue;}
+                case "3":
+                    neo.printAllData();
+                    break;
+                default:
+                    System.out.println("Error - invalid response entered.");
+                    return;
+            }
+        }
+        return;
     }
 
 }

@@ -35,7 +35,14 @@ public class NearEarthObject {
     private double missDistMi;
 
     // Constructor
-    public NearEarthObject(String neoReferenceId, String nasaJplUrl, Boolean isSentryObj, String name, Boolean isPotentiallyHazardous, double absoluteMagnitudeH, String links, String id, double estDiamMaxFt, double estDiamMinFt, double estDiamMaxKm, double estDiamMinKm, double estDiamMaxM, double estDiamMinM, double estDiamMaxMi, double estDiamMinMi, double relVelKmPHr, double relVelKmPSec, double relVelMPH, String orbitingBody, String closeApproachDate, double missDistAstronom, double missDistKm, double missDistLunar, double missDistMi) {
+    public NearEarthObject(String neoReferenceId, String nasaJplUrl, Boolean isSentryObj,
+                           String name, Boolean isPotentiallyHazardous, double absoluteMagnitudeH,
+                           String links, String id, double estDiamMaxFt, double estDiamMinFt,
+                           double estDiamMaxKm, double estDiamMinKm, double estDiamMaxM,
+                           double estDiamMinM, double estDiamMaxMi, double estDiamMinMi,
+                           double relVelKmPHr, double relVelKmPSec, double relVelMPH,
+                           String orbitingBody, String closeApproachDate, double missDistAstronom,
+                           double missDistKm, double missDistLunar, double missDistMi) {
         this.neoReferenceId = neoReferenceId;
         this.nasaJplUrl = nasaJplUrl;
         this.isSentryObj = isSentryObj;
@@ -64,6 +71,7 @@ public class NearEarthObject {
     }
 
     // Getters and Setters
+    // Not necessary for now, but to be used for future use
     public String getNeoReferenceId() {
         return neoReferenceId;
     }
@@ -318,25 +326,29 @@ public class NearEarthObject {
     }
 
     // Prints information for all potentially hazardous or all not hazardous
-    public static void printOnlyHazardous(String wantHazardous, ArrayList<NearEarthObject> list) {
+    public static void printOnlyHazardous(String wantHazardous, ArrayList<NearEarthObject> list) throws Exception {
+        // Loop through arraylist of NEOs
         for (NearEarthObject neo : list) {
+            // Based on wantHazardous response, print correct options
             switch (wantHazardous) {
                 case "1":
+                    // If potentially hazardous is true, print data
                     if (neo.getPotentiallyHazardous()) {
                         neo.printAllData();
                         break;
                     } else {continue;}
                 case "2":
+                    // If potentially hazardous is false, print data
                     if (!neo.getPotentiallyHazardous()) {
                         neo.printAllData();
                         break;
                     } else {continue;}
                 case "3":
+                    // Print data regardless of hazardous
                     neo.printAllData();
                     break;
                 default:
-                    System.out.println("Error - invalid response entered.");
-                    return;
+                    throw new Exception(wantHazardous + " not a valid option.");
             }
         }
         return;

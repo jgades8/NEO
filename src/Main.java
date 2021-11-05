@@ -1,6 +1,11 @@
 import java.net.*;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -131,15 +136,15 @@ public class Main {
                             missDistLunar, missDistMi);
                     nearEarthObjectArrayList.add(neo);
 
-//                        // Print data
-//                        nearEarthObjectArrayList.get(i).printGeneralInfo();
-//                        nearEarthObjectArrayList.get(i).printMissData();
-//                        nearEarthObjectArrayList.get(i).printEstDiamInfo();
-//                        nearEarthObjectArrayList.get(i).printVelData();
 
                     // Increment iterator values
                     itr.next();
                     ++i;
+                }
+
+                // Verify that there are more than 0 objects in array list
+                if (nearEarthObjectArrayList.isEmpty()) {
+                    throw new IndexOutOfBoundsException();
                 }
 
                 // Allow user to choose if they want only potentially hazardous, not hazardous, or all data
@@ -172,15 +177,13 @@ public class Main {
 
     // Verify date input
     public static boolean verifyDateFormat(String date) {
-        for (int i = 0; i < date.length(); i++) {
-            char c = date.charAt(i);
-            if ( i == 4 | i == 7 ) {
-                if (c == '-') {continue;}
-                else {return false;}
-            } else {
-                if (Character.isDigit(c)) {continue;}
-                else {return false;}
-            }
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            dateFormat.setLenient(false);
+            Date javaDate = dateFormat.parse(date);
+        } catch (Exception e) {
+            System.out.println("Invalid date format.");
+            return false;
         }
         return true;
     }

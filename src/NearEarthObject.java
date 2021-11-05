@@ -71,7 +71,7 @@ public class NearEarthObject {
     }
 
     // Getters and Setters
-    // Not necessary for now, but to be used for future use
+    // Not necessary for now, but potentially to be used for future use
     public String getNeoReferenceId() {
         return neoReferenceId;
     }

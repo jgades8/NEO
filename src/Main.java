@@ -80,60 +80,43 @@ public class Main {
                     // Get data for specific asteroid based on index i
                     JSONObject specificAsteroid = (JSONObject) specificDate.get(i);
 
-                    // Get general data
-                    String neoReferenceId = (String) specificAsteroid.get("neo_reference_id");
-                    String nasaJplUrl = (String) specificAsteroid.get("nasa_jpl_url");
-                    Boolean isPotentiallyHazardous = (boolean) specificAsteroid.get("is_potentially_hazardous_asteroid");
-                    Boolean isSentry = (boolean) specificAsteroid.get("is_sentry_object");
-                    String name = (String) specificAsteroid.get("name");
-                    Double absoluteMagnitudeH = (Double) specificAsteroid.get("absolute_magnitude_h");
-                    String id = (String) specificAsteroid.get("id");
-
                     // Get data within close approach data
                     JSONArray closeApproachData = (JSONArray) specificAsteroid.get("close_approach_data");
                     // Use get(0) since each asteroid only has one close approach date
                     JSONObject approachData = (JSONObject) closeApproachData.get(0);
-                    String orbitingBody = (String) approachData.get("orbiting_body");
-                    String closeApproachDate = (String) approachData.get("close_approach_date");
 
-                    // Relative velocity data
+                    // Get relative velocity object
                     JSONObject relVelocity = (JSONObject) approachData.get("relative_velocity");
-                    Double relVelKmPHr = Double.parseDouble((String) relVelocity.get("kilometers_per_hour"));
-                    Double relVelKmPSec = Double.parseDouble((String) relVelocity.get("kilometers_per_second"));
-                    Double relVelMPH = Double.parseDouble((String) relVelocity.get("miles_per_hour"));
 
-                    // Miss distance data
+                    // Get miss distance object
                     JSONObject missDistance = (JSONObject) approachData.get("miss_distance");
-                    Double missDistAstronom = Double.parseDouble((String) missDistance.get("astronomical"));
-                    Double missDistKm = Double.parseDouble((String) missDistance.get("kilometers"));
-                    Double missDistLunar = Double.parseDouble((String) missDistance.get("lunar"));
-                    Double missDistMi = Double.parseDouble((String) missDistance.get("miles"));
 
-                    // Get estimated diameter data
+                    // Get estimated diameter objects
                     JSONObject estDiam = (JSONObject) specificAsteroid.get("estimated_diameter");
                     JSONObject estDiamFt = (JSONObject) estDiam.get("feet");
-                    Double estDiamMaxFt = (Double) estDiamFt.get("estimated_diameter_max");
-                    Double estDiamMinFt = (Double) estDiamFt.get("estimated_diameter_min");
                     JSONObject estDiamKm = (JSONObject) estDiam.get("kilometers");
-                    Double estDiamMaxKm = (Double) estDiamKm.get("estimated_diameter_max");
-                    Double estDiamMinKm = (Double) estDiamKm.get("estimated_diameter_min");
                     JSONObject estDiamM = (JSONObject) estDiam.get("meters");
-                    Double estDiamMaxM = (Double) estDiamM.get("estimated_diameter_max");
-                    Double estDiamMinM = (Double) estDiamM.get("estimated_diameter_min");
                     JSONObject estDiamMi = (JSONObject) estDiam.get("miles");
-                    Double estDiamMaxMi = (Double) estDiamMi.get("estimated_diameter_max");
-                    Double estDiamMinMi = (Double) estDiamMi.get("estimated_diameter_min");
 
-                    // Get links data
+
+                    // Get links object
                     JSONObject linksObj = (JSONObject) specificAsteroid.get("links");
-                    String links = (String) linksObj.get("self");
 
                     // Create new NEO object and add to array
-                    NearEarthObject neo = new NearEarthObject(neoReferenceId, nasaJplUrl, isSentry, name, isPotentiallyHazardous,
-                            absoluteMagnitudeH, links, id, estDiamMaxFt, estDiamMinFt, estDiamMaxKm, estDiamMinKm,
-                            estDiamMaxM, estDiamMinM, estDiamMaxMi, estDiamMinMi, relVelKmPHr, relVelKmPSec,
-                            relVelMPH, orbitingBody, closeApproachDate, missDistAstronom, missDistKm,
-                            missDistLunar, missDistMi);
+                    NearEarthObject neo = new NearEarthObject((String) specificAsteroid.get("neo_reference_id"),
+                            (String) specificAsteroid.get("nasa_jpl_url"), (boolean) specificAsteroid.get("is_sentry_object"),
+                            (String) specificAsteroid.get("name"), (boolean) specificAsteroid.get("is_potentially_hazardous_asteroid"),
+                            (Double) specificAsteroid.get("absolute_magnitude_h"), (String) linksObj.get("self"), (String) specificAsteroid.get("id"),
+                            (Double) estDiamFt.get("estimated_diameter_max"), (Double) estDiamFt.get("estimated_diameter_min"),
+                            (Double) estDiamKm.get("estimated_diameter_max"), (Double) estDiamKm.get("estimated_diameter_min"),
+                            (Double) estDiamM.get("estimated_diameter_max"), (Double) estDiamM.get("estimated_diameter_min"),
+                            (Double) estDiamMi.get("estimated_diameter_max"), (Double) estDiamMi.get("estimated_diameter_min"),
+                            Double.parseDouble((String) relVelocity.get("kilometers_per_hour")),
+                            Double.parseDouble((String) relVelocity.get("kilometers_per_second")),
+                            Double.parseDouble((String) relVelocity.get("miles_per_hour")), (String) approachData.get("orbiting_body"),
+                            (String) approachData.get("close_approach_date"), Double.parseDouble((String) missDistance.get("astronomical")),
+                            Double.parseDouble((String) missDistance.get("kilometers")), Double.parseDouble((String) missDistance.get("lunar")),
+                            Double.parseDouble((String) missDistance.get("miles")));
                     nearEarthObjectArrayList.add(neo);
 
 
